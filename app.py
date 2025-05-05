@@ -5,11 +5,20 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification, pipe
 app = Flask(__name__)
 
 # Load model and tokenizer from saved directory
-model = AutoModelForSequenceClassification.from_pretrained("./emotion_model")
-tokenizer = AutoTokenizer.from_pretrained("./emotion_model")
+model = AutoModelForSequenceClassification.from_pretrained("Ali508208/emotion-model")
+tokenizer = AutoTokenizer.from_pretrained("Ali508208/emotion-model")
 
 # Create pipeline
 emotion_pipeline = pipeline("text-classification", model=model, tokenizer=tokenizer, return_all_scores=True)
+
+# Default route
+@app.route('/', methods=['GET'])
+def index():
+    return jsonify({
+        "message": "Welcome to the Emotion Detection API!",
+        "usage": "Send a POST request to /predict with JSON: { 'text': 'your input text here' }"
+    })
+
 
 @app.route('/predict', methods=['POST'])
 def predict_emotion():
