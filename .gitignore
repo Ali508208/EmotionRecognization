@@ -1,0 +1,9 @@
+# Ignore training scripts
+prepare_goemotions.py
+train_model.py
+
+# Ignore dataset folder and all subfolders/files
+data/
+
+# Ignore model folder if you DON'T want to upload it (for local training only)
+emotion_model/
